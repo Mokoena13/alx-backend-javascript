@@ -1,19 +1,26 @@
 #!/usr/bin/python3
 
 def pascal_triangle(n):
-    matrix = []
-
+    # Check if n is less than or equal to 0
     if n <= 0:
-        return matrix
+        return []
 
-    matrix = [[1]]
+    # Initialize the Pascal's triangle with the first row
+    triangle = [[1]]
 
+    # Iterate from the second row to the nth row
     for i in range(1, n):
-        temp = [1]
-        for j in range(len(matrix[i - 1]) - 1):
-            curr = matrix[i - 1]
-            temp.append(matrix[i - 1][j] + matrix[i - 1][j + 1])
-        temp.append(1)
-        matrix.append(temp)
+        # Create a new row
+        row = [1]
 
-    return matrix
+        # Iterate through the previous row to calculate values for the current row
+        for j in range(1, len(triangle[i - 1])):
+            row.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
+
+        # Add the last element of the row
+        row.append(1)
+
+        # Append the new row to the triangle
+        triangle.append(row)
+
+    return triangle
